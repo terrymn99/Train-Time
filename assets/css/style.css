@@ -1,71 +1,31 @@
 .container {
     width: 100%;
-    height: 800px;
-    background-color: gray;
+    height: 100%;
 }
 
 .jumbotron {
     background-color: red;
-    color: white;
-    width: 1200px;
-    height: 125px;
-    margin-right: auto;
-    margin-left: auto;
     text-align: center;
-    padding-top: 10px;
+    color: white;
 }
 
-.heading {
-    font-size: 85px;
-}
 
-#col-1  {
-    text-decoration: underline;
-}
 
 .table {
-    margin-right: auto;
-    margin-left: auto;
-    width: 1200px;
-    height: 300px;
-    
-    text-align: center;
     background-color: black;
     color: white;
-    font-size: 17px;
+    height: 250px;
 }
 
-.form  {
-    margin-right: auto;
-    margin-left: auto;
-    height: 240px;
-    width: 1200px;
+.form {
+    height: 610px;
     background-color: beige;
-}
+    padding-top: 35px;
+    font-size: 25px;
 
-#input-train  {
-    width:800px;
-}
-
-#input-destination  {
-    width:804px;
-}
-
-#input-firstTrain  {
-    width:603px;
-}
-
-#input-frequency  {
-    width:713px;
 }
 
 .submit-button {
-    background-color:black;
+    backround-color: red;
     color: white;
-    padding: 5px;
-    font-size: 20px;
-}
-
-.form-group  {
-    font-size: 25px;
 }
