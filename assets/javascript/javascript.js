@@ -13,13 +13,14 @@ $(document).ready(function () {
     firebase.initializeApp(config);
 
     //creating variables
+    var database = firebase.database();
     var trainName = "";
     var destination = "";
     var firstTrainTime = "";
     var frequency = "";
     var nextArrival = "";
     var minutesAway = "";
-    var database = firebase.database();
+    
 
     //Creating variables storing user's input
     $("#submit-button").on("click", function () {
@@ -28,13 +29,23 @@ $(document).ready(function () {
         firstTrainTime = $("#input-firstTrain").val().trim();
         frequency = $("#input-frequency").val().trim();
 
-        //Setting filenames in database
-        firebase.database().ref().set({
+        //Pushing data to database
+        firebase.database().ref().push({
             trainName: trainName,
             destination: destination,
             firstTrainTime: firstTrainTime,
-            frequency: frequency
+            frequency: frequency,
+            
+           
         })
+        console.log(trainName);
     })
-    
+    //Creating event listener
+  firebase.database().ref().on("child_added", function (snapshot) {
+        $("trainNameDisplay").html(snapshot.val().trainName);
+        $("destinationDisplay").html(snapshot.val().destination);
+        $("frequencyDisplay").html(snapshot.val().frequency);
+        $("nextArrivalDisplay").html(snapshot.val().nextArrival);
+        
+    })
 })
