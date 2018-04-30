@@ -23,6 +23,8 @@ $(document).ready(function () {
     var nextArrival = "";
     var minutesAway = "";
     var currentTime = "";
+    var adjustedTrainTime = "";
+    var trainTimeDifference = "";
 
     //Event listener for when submit button is clicked
     $("#submit-button").on("click", function (event) {
@@ -33,7 +35,7 @@ $(document).ready(function () {
         destination = $("#input-destination").val().trim();
         firstTrainTime = $("#input-firstTrain").val().trim();
         frequency = $("#input-frequency").val().trim();
-        //minutesAway = $("#input-frequency").val().trim();
+        minutesAway = $("#input-minutesAway").val().trim();
 
         //Create object with temp variables containing train data
         var newTrain = {
@@ -41,7 +43,7 @@ $(document).ready(function () {
             destination: destination,
             firstTrainTime: firstTrainTime,
             frequency: frequency,
-            //minutesAway: minutesAway
+            minutesAway: minutesAway
         };
 
         //Pushing data to firebase database
@@ -52,16 +54,17 @@ $(document).ready(function () {
         $("#input-destination").val("");
         $("#input-firstTrain").val("");
         $("#input-frequency").val("");
+        $("#input-minutesAway").val("");
 
     })
     //Creating event listener for when child is added to database
     database.ref().on("child_added", function (childSnapshot) {
 
         var tableRow = $("<tr>");
-        
+
         var trainNameDisplay = $("<td>");
         trainNameDisplay.text(childSnapshot.val().trainName);
-        tableRow.append(trainNameDisplay);
+        trainNameDisplay.appendTo(tableRow);
 
         var destinationDisplay = $("<td>");
         destinationDisplay.text(childSnapshot.val().destination);
@@ -75,11 +78,14 @@ $(document).ready(function () {
         frequencyDisplay.text(childSnapshot.val().frequency);
         tableRow.append(frequencyDisplay);
 
-        //var minutesAwayDisplay = $("<td>");
-        //minutesAwayDisplay.text(childSnapshot.val().minutesAway);
-        //tableRow.append(minutesAwayDisplay);
+        var minutesAwayDisplay = $("<td>");
+        minutesAwayDisplay.text(childSnapshot.val().minutesAway);
+        tableRow.append(minutesAwayDisplay);
 
-        $("#trainTable > tbody").append(tableRow);
+        $("#tbody").append(tableRow);
+    }, function (errorObject) {
+        // Error message
+        console.log("Errors handled: " + errorObject.code);
     });
-});
+})
 
